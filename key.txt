@@ -1,63 +1,85 @@
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Mobile%20Friendly%20Orion')))() --This Will Load The Script Code
-local Window = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = true, IntroEnabled = false})
-local Player = game.Players.LocalPlayer
- 
---notifer user
-OrionLib:MakeNotification({
-	Name = "Logged in!",
-	Content = "You are logged in as "..Player.Name..".",
-	Image = "rbxassetid://99994054223025439998",
-	Time = 5
-})
-
-_G.Key = "HyperV2"
-_G.KeyImput = "string"
+local Player = game.Players.LocalPlayer --This Will Reveal The Player Name
+  local Window = OrionLib:MakeWindow({
+        Name = "Hyper Hub key system ",
+        HidePremium = false,
+        SaveConfig = true,
+        ConfigFolder = "OrionTest",
+        IntroText = "Loading Script..."       
+}) --This Will Load The Script Hub
 
 function MakeScriptHub()
-    local Window = OrionLib:MakeWindow({Name = "Hyper Hub V2", HidePremium = false, SaveConfig = true, IntroEnabled = true, IntroText = "Hyper Hub V2"})
-end
+         loadstring(game:HttpGet("https://raw.githubusercontent.com/rimuru7xs/hyper-hub-v2/main/HYPER%20HUB%20V2.txt"))() --Coloque aqui o script que será carregado quandk colocar a key correta
 
-function CorrectKeyNotification()
-    OrionLib:MakeNotification({
-        Name = "Correct Key",
-        Content = "You Have entered the correct key!",
-        Image = "rbxassetid://99994054223025439998",
-        Time = 5
-    })
-end
+OrionLib:MakeNotification({
+    Name = "Logado!",
+    Content = "Você precisa da key "..Player.Name..".",
+    Image = "rbxassetid://4483345998",
+    Time = 5
+}) --Notification
 
-function InCorrectKeyNotification()
-    OrionLib:MakeNotification({
-        Name = "InCorrect Key",
-        Content = "You Have entered the Incorrect key!",
-        Image = "rbxassetid://99994054223025439998",
-        Time = 5
-    })
-end
+getgenv().Key = "HYPER_HUB" --Coloque a key certa aqui
+getgenv().KeyInput = "string" --Require For The Key To Work
 
- local Tab = Window:MakeTab({
-	Name = "Key",
-	Icon = "rbxassetid://99994054223025439",
-	PremiumOnly = false
-})
+local Tab = Window:MakeTab({
+    Name = "Key",
+    Icon = "rbxassetid://4483345998",
+    PremiumOnly = false
+}) --Making A Tab
 
 Tab:AddTextbox({
-	Name = "Enter Key",
-	Default = "",
-	TextDisappear = true,
-	Callback = function(Value)
-		_G.KeyInput = Value
-	end	  
-})
+    Name = "Key",
+    Default = "Enter Key.",
+    TextDisappear = true,
+    Callback = function(Value)
+        getgenv().KeyInput = Value
+    end      
+}) --You Will Enter The Key Here
 
 Tab:AddButton({
-	Name = "Check Key",
-	Callback = function()
-      	if _G.KeyInput == _G.Key then
-        MakeScriptHub()
-        CorrectKeyNotification()
+    Name = "Check Key",
+    Callback = function()
+        if getgenv().KeyInput == getgenv().Key then
+            OrionLib:MakeNotification({
+                Name = "Verificando Key",
+                Content = "Verificando a key que você digitou",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+            wait(2)
+            OrionLib:MakeNotification({
+                Name = "Key correta!",
+                Content = "A Key que você digitou está Correta.",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+            wait(1)
+            OrionLib:Destroy()
+            wait(.3)
+            MakeScriptHub()
         else
-            InCorrectKeyNotification()
-		end
-  	end    
+           OrionLib:MakeNotification({
+                Name = "Verificando Key",
+                Content = "Verificando a key que você digitou",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+            wait(2)
+            OrionLib:MakeNotification({
+                Name = "Key Incorreta!",
+                Content = "A Key que você digitou está incorreta.",
+                Image = "rbxassetid://4483345998",
+                Time = 5
+            })
+        end
+    end
+}) --This Will Check The Key You Entered
+
+Tab:AddButton({
+    Name = "Get Key",
+    Callback = function()
+              setclipboard("https://discord.gg/yuaN9bG8Mm") --Isso copiará o link da get key
+      end    
 }) 
+    
+OrionLib:Init() --Require If The Script Is Done
