@@ -1,0 +1,63 @@
+local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/ionlyusegithubformcmods/1-Line-Scripts/main/Mobile%20Friendly%20Orion')))() --This Will Load The Script Code
+local Window = OrionLib:MakeWindow({Name = "Key System", HidePremium = false, SaveConfig = true, IntroEnabled = false})
+local Player = game.Players.LocalPlayer
+ 
+--notifer user
+OrionLib:MakeNotification({
+	Name = "Logged in!",
+	Content = "You are logged in as "..Player.Name..".",
+	Image = "rbxassetid://99994054223025439998",
+	Time = 5
+})
+
+_G.Key = "HyperV2"
+_G.KeyImput = "string"
+
+function MakeScriptHub()
+    local Window = OrionLib:MakeWindow({Name = "Hyper Hub V2", HidePremium = false, SaveConfig = true, IntroEnabled = true, IntroText = "Hyper Hub V2"})
+end
+
+function CorrectKeyNotification()
+    OrionLib:MakeNotification({
+        Name = "Correct Key",
+        Content = "You Have entered the correct key!",
+        Image = "rbxassetid://99994054223025439998",
+        Time = 5
+    })
+end
+
+function InCorrectKeyNotification()
+    OrionLib:MakeNotification({
+        Name = "InCorrect Key",
+        Content = "You Have entered the Incorrect key!",
+        Image = "rbxassetid://99994054223025439998",
+        Time = 5
+    })
+end
+
+ local Tab = Window:MakeTab({
+	Name = "Key",
+	Icon = "rbxassetid://99994054223025439",
+	PremiumOnly = false
+})
+
+Tab:AddTextbox({
+	Name = "Enter Key",
+	Default = "",
+	TextDisappear = true,
+	Callback = function(Value)
+		_G.KeyInput = Value
+	end	  
+})
+
+Tab:AddButton({
+	Name = "Check Key",
+	Callback = function()
+      	if _G.KeyInput == _G.Key then
+        MakeScriptHub()
+        CorrectKeyNotification()
+        else
+            InCorrectKeyNotification()
+		end
+  	end    
+}) 
